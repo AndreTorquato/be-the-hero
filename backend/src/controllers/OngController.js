@@ -23,6 +23,6 @@ module.exports = {
              uf,
          });
      
-         return response.json({ email });
+         return response.json({ id });
     }
 }
