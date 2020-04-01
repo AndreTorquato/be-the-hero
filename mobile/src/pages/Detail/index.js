@@ -23,7 +23,7 @@ export default function Detail(){
         });
     }
     function sendWhatsapp(){
-        Linking.openURL(`whatsapp://send?phone=558894472628&text=${message}`);
+        Linking.openURL(`whatsapp://send?phone=${incident.whatsapp}&text=${message}`);
     };
     return (
     <View style = {styles.container}>
