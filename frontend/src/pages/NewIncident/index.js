@@ -1,35 +1,23 @@
-import React , {useState}from 'react';
+import React from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {Animated} from "react-animated-css";
 import {FiArrowLeft} from 'react-icons/fi';
-
 import api from '../../services/api';
-
 import logoImg from '../../assets/logo.svg';
+import useForm from '../../Hooks/useForm';
 
 import './styles.css';
 
 export default function NewIncident() {
   const ongId = localStorage.getItem('ongId');
   const history = useHistory();
-
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [value, setValue] = useState('');
-
+  const [form, setForm] = useForm({value: '', description: '', title: ''})
  
   async function handleNewIncident(event) {
     event.preventDefault();
-
-    const data = {
-      title,
-      description,
-      value
-    }
-  
     try {
       await api.post('incidents',
-        data, {
+        form, {
           headers: {
             Authorization: ongId
           }
@@ -61,20 +49,20 @@ export default function NewIncident() {
               <input
                 placeholder="Título do caso"
                 name="title"
-                value={title}
-                onChange={event => setTitle(event.target.value)}
+                value={form.title}
+                onChange={setForm}
               />
               <textarea 
                 placeholder="Descrição"
                 name="description"
-                value={description}
-                onChange={event => setDescription(event.target.value)}
+                value={form.description}
+                onChange={setForm}
               />
               <input 
                 placeholder="Valor em reais"
                 name="value"
-                value={value}
-                onChange={event => setValue(event.target.value)}
+                value={form.value}
+                onChange={setForm}
               />
 
               <button className="button" type="submit">

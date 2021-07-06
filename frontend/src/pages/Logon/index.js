@@ -1,20 +1,17 @@
 import React, {useState} from 'react';
 import {FiLogIn} from 'react-icons/fi';
 import {Link, useHistory} from 'react-router-dom';
-
 import api from '../../services/api';
 import './styles.css';
-
 import logoImg from '../../assets/logo.svg';
 import heroesImg from '../../assets/heroes.png';
 
 export default function Logon() {
   const [email, setEmail] = useState('');
-
   const history = useHistory();
+
   async function handleLogin(event) {
     event.preventDefault();
-
     try {
       const response = await api.post('sessions', { email });
       
